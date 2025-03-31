@@ -25,6 +25,6 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Create Release Pull Request
-        uses: tepzilon/changesets-action@ff7179cf129faeb3e444f56e6290adef5901f936
+        uses: tepzilon/changesets-action@23c046d21c2c3818e7d39eee3c9377ad6a7493e9
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
