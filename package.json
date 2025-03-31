@@ -1,8 +1,10 @@
 {
   "name": "test-changesets-ci",
+  "version": "0.0.0",
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
+    "@changesets/cli": "^2.28.1",
     "@types/bun": "latest"
   },
   "peerDependencies": {
