@@ -25,6 +25,6 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Create Release Pull Request
-        uses: changesets/action@v1
+        uses: AlphaFinanceLab/changesets-action@ff7179cf129faeb3e444f56e6290adef5901f936
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
