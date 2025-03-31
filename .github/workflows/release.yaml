@@ -26,5 +26,7 @@ jobs:
 
       - name: Create Release Pull Request
         uses: tepzilon/changesets-action@23c046d21c2c3818e7d39eee3c9377ad6a7493e9
+        with:
+          releaseBranch: production
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
