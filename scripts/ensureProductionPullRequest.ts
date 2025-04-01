@@ -40,7 +40,7 @@ const getChangelogDiff = async ({ changelogPath, octokit }: CompareChangelogOpti
 
         const idxOfbaseLatestVerInHeadChangelog = headChangelog.indexOf(baseLatestVersion)
         if (idxOfbaseLatestVerInHeadChangelog !== -1) {
-          const changelogDiff = headChangelog.slice(idxOfbaseLatestVerInHeadChangelog)
+          const changelogDiff = headChangelog.slice(0, idxOfbaseLatestVerInHeadChangelog)
           return changelogDiff.trim()
         } else {
           throw new Error(`Latest version not found in head changelog`)
