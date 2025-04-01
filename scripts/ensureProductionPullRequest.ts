@@ -92,6 +92,7 @@ const getPullRequestBody = async ({ octokit }: GetPullRequestBodyOptions) => {
     }
   }
 
+  console.log(parts)
   return parts.join('\n\n')
 }
 
