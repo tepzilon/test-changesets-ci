@@ -1,8 +1,10 @@
 {
   "name": "test-changesets-ci",
-  "version": "0.5.0",
   "module": "index.ts",
   "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "production": "bun run scripts/ensureProductionPullRequest.ts"
   },
