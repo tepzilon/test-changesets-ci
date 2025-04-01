@@ -1,5 +1,11 @@
 # test-changesets-ci
 
+## 0.5.0
+
+### Minor Changes
+
+- c51d38f: fix script bug
+
 ## 0.4.0
 
 ### Minor Changes
