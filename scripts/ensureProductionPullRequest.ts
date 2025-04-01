@@ -1,7 +1,7 @@
 import { Octokit } from '@octokit/rest'
 
-const OWNER = 'AlphaFinanceLab'
-const REPO = 'infinit-agents-monorepo'
+const OWNER = 'tepzilon'
+const REPO = 'test-changesets-ci'
 const HEAD = 'main'
 const BASE = 'production'
 
