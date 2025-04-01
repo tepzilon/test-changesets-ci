@@ -33,7 +33,7 @@ const ensureProductionPullRequest = async () => {
   const body = Date.now().toString()
 
   if(pullRequests.data.length === 1) {
-    const pullNumber = pullRequests.data[0].id
+    const pullNumber = pullRequests.data[0].number
     await octokit.rest.pulls.update({
       owner: OWNER,
       repo: REPO,
