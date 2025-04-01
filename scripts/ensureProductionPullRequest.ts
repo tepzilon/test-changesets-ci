@@ -26,6 +26,7 @@ const getChangelogDiff = async ({ changelogPath, octokit }: CompareChangelogOpti
         path: changelogPath,
         ref: BASE,
       })
+      console.log('Changelog found in base branch')
       const data = baseChangelog.data
       if (!Array.isArray(data) && 'content' in data && 'encoding' in data) {
         const content = data.content
@@ -50,6 +51,7 @@ const getChangelogDiff = async ({ changelogPath, octokit }: CompareChangelogOpti
     } catch (error) {
       if (error instanceof RequestError) {
         if (error.status === 404) {
+          console.log(`Changelog not found in base branch, using head changelog`)
           return headChangelog.trim()
         } else {
           throw error
