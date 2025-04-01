@@ -1,5 +1,11 @@
 # test-changesets-ci
 
+## 0.3.0
+
+### Minor Changes
+
+- 6302789: change hello msg
+
 ## 0.2.0
 
 ### Minor Changes
