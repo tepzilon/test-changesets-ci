@@ -1,5 +1,11 @@
 # test-changesets-ci
 
+## 0.6.0
+
+### Minor Changes
+
+- 6e5509f: feat feat
+
 ## 0.5.0
 
 ### Minor Changes
