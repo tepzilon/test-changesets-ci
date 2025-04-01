@@ -16,6 +16,7 @@ interface CompareChangelogOptions {
 }
 
 const getChangelogDiff = async ({ changelogPath, octokit }: CompareChangelogOptions): Promise<string> => {
+  console.log('Processing changelog diff for', changelogPath)
   if (await fs.exists(changelogPath)) {
     const headChangelog = await fs.readFile(changelogPath, 'utf-8')
     try {
@@ -116,6 +117,7 @@ const ensureProductionPullRequest = async () => {
   }
 
   const body = await getPullRequestBody({ octokit })
+  console.log(body)
 
   if (pullRequests.data.length === 1) {
     const pullNumber = pullRequests.data[0].number
