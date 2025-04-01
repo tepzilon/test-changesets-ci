@@ -1,5 +1,11 @@
 # test-changesets-ci
 
+## 0.4.0
+
+### Minor Changes
+
+- 4f5d94d: update script
+
 ## 0.3.0
 
 ### Minor Changes
