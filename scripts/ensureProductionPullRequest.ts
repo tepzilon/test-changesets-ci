@@ -71,7 +71,7 @@ const getPullRequestBody = async ({ octokit }: GetPullRequestBodyOptions) => {
 
   const rootChangelogPath = CHANGELOG_FILE_NAME
   if (await fs.exists(rootChangelogPath)) {
-    const rootChangelogDiff = getChangelogDiff({
+    const rootChangelogDiff = await getChangelogDiff({
       changelogPath: rootChangelogPath,
       octokit,
     })
