@@ -1,5 +1,11 @@
 # pkg-a
 
+## 0.2.0
+
+### Minor Changes
+
+- 738e29e: update pkg-a
+
 ## 0.1.0
 
 ### Minor Changes
