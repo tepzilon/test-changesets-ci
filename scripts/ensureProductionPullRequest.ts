@@ -16,7 +16,6 @@ interface CompareChangelogOptions {
 }
 
 const getChangelogDiff = async ({ changelogPath, octokit }: CompareChangelogOptions): Promise<string> => {
-  console.log('Processing changelog diff for', changelogPath)
   if (await fs.exists(changelogPath)) {
     const headChangelog = await fs.readFile(changelogPath, 'utf-8')
     try {
@@ -26,7 +25,6 @@ const getChangelogDiff = async ({ changelogPath, octokit }: CompareChangelogOpti
         path: changelogPath,
         ref: BASE,
       })
-      console.log('Changelog found in base branch')
       const data = baseChangelog.data
       if (!Array.isArray(data) && 'content' in data && 'encoding' in data) {
         const content = data.content
@@ -51,7 +49,6 @@ const getChangelogDiff = async ({ changelogPath, octokit }: CompareChangelogOpti
     } catch (error) {
       if (error instanceof RequestError) {
         if (error.status === 404) {
-          console.log(`Changelog not found in base branch, using head changelog`)
           return headChangelog.trim()
         } else {
           throw error
@@ -94,7 +91,6 @@ const getPullRequestBody = async ({ octokit }: GetPullRequestBodyOptions) => {
     }
   }
 
-  console.log(parts)
   return parts.join('\n\n')
 }
 
@@ -120,7 +116,6 @@ const ensureProductionPullRequest = async () => {
   }
 
   const body = await getPullRequestBody({ octokit })
-  console.log(body)
 
   if (pullRequests.data.length === 1) {
     const pullNumber = pullRequests.data[0].number

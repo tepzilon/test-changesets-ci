@@ -1,1 +1,1 @@
-console.log("Hello via Bun! feature pkg-a");
+console.log("Hello via Bun! feature pkg-a update");

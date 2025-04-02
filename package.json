@@ -6,7 +6,7 @@
     "packages/*"
   ],
   "scripts": {
-    "production": "bun run scripts/ensureProductionPullRequest.ts"
+    "production": "bun changeset tag && git push --tags origin && bun run scripts/ensureProductionPullRequest.ts"
   },
   "devDependencies": {
     "@changesets/cli": "^2.28.1",
