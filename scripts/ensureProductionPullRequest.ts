@@ -16,49 +16,51 @@ interface CompareChangelogOptions {
 }
 
 const getChangelogDiff = async ({ changelogPath, octokit }: CompareChangelogOptions): Promise<string> => {
-  if (await fs.exists(changelogPath)) {
-    const headChangelog = await fs.readFile(changelogPath, 'utf-8')
-    try {
-      const baseChangelog = await octokit.rest.repos.getContent({
-        owner: OWNER,
-        repo: REPO,
-        path: changelogPath,
-        ref: BASE,
-      })
-      const data = baseChangelog.data
-      if (!Array.isArray(data) && 'content' in data && 'encoding' in data) {
-        const content = data.content
-        const encoding = data.encoding as BufferEncoding
-        const decodedContent = Buffer.from(content, encoding).toString('utf-8')
-
-        const baseLatestVersion = decodedContent.split('\n').find((line) => line.startsWith('##'))
-        if (!baseLatestVersion) {
-          return headChangelog.trim()
-        }
-
-        const idxOfbaseLatestVerInHeadChangelog = headChangelog.indexOf(baseLatestVersion)
-        if (idxOfbaseLatestVerInHeadChangelog !== -1) {
-          const changelogDiff = headChangelog.slice(0, idxOfbaseLatestVerInHeadChangelog)
-          return changelogDiff.trim()
-        } else {
-          throw new Error(`Latest version not found in head changelog`)
-        }
-      } else {
-        throw new Error(`Invalid response from GitHub API`)
-      }
-    } catch (error) {
-      if (error instanceof RequestError) {
-        if (error.status === 404) {
-          return headChangelog.trim()
-        } else {
-          throw error
-        }
-      } else {
-        throw error
-      }
-    }
+  if (!(await fs.exists(changelogPath))) {
+    return ''
   }
-  return ''
+
+  const headChangelog = await fs.readFile(changelogPath, 'utf-8')
+  try {
+    const baseChangelog = await octokit.rest.repos.getContent({
+      owner: OWNER,
+      repo: REPO,
+      path: changelogPath,
+      ref: BASE,
+    })
+    const data = baseChangelog.data
+    const isDataValid = !Array.isArray(data) && 'content' in data && 'encoding' in data
+    if (!isDataValid) {
+      throw new Error(`Invalid response from GitHub API`)
+    }
+
+    const content = data.content
+    const encoding = data.encoding as BufferEncoding
+    const decodedContent = Buffer.from(content, encoding).toString('utf-8')
+
+    const baseLatestVersion = decodedContent.split('\n').find((line) => line.startsWith('##'))
+    if (!baseLatestVersion) {
+      return headChangelog.trim()
+    }
+
+    const idxOfbaseLatestVerInHeadChangelog = headChangelog.indexOf(baseLatestVersion)
+    if (idxOfbaseLatestVerInHeadChangelog === -1) {
+      throw new Error(`Latest version not found in head changelog`)
+    }
+
+    const changelogDiff = headChangelog.slice(0, idxOfbaseLatestVerInHeadChangelog)
+    return changelogDiff.trim()
+  } catch (error) {
+    if (!(error instanceof RequestError)) {
+      throw error
+    }
+
+    if (error.status !== 404) {
+      throw error
+    }
+
+    return headChangelog.trim()
+  }
 }
 
 interface GetPullRequestBodyOptions {
