@@ -29,4 +29,5 @@ jobs:
         with:
           publish: bun production
         env:
+          GITHUB_REPO: ${{ github.repository }}
           GITHUB_TOKEN: ${{ github.token }}
